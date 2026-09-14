@@ -1,0 +1,16 @@
+# Images and Videos (Private memories kept local)
+*.jpg
+*.jpeg
+*.png
+*.webp
+*.gif
+*.mp4
+*.mov
+*.avi
+
+# System & IDE files
+.DS_Store
+Thumbs.db
+*.tmp
+.vscode/
+.idea/

@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#0c0614">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Happy Birthday, Uma ❤️</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Great+Vibes&family=Noto+Sans+Bengali:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Ambient Glowing Background Particles & Magic Trail Canvas -->
+    <canvas id="ambientCanvas"></canvas>
+    <canvas id="sparkleTrailCanvas"></canvas>
+
+    <!-- Background Birthday Song -->
+    <audio id="bgMusic" loop preload="auto">
+        <source src="song_birthday_1.mp3" type="audio/mpeg">
+        <source src="Y2Mate.is - HAPPY Birthday Song Happy Birthday to You.mp3" type="audio/mpeg">
+        <source src="music.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Top Music Toggle Button -->
+    <button class="music-toggle" id="musicToggle" title="Toggle Birthday Song">
+        <span id="musicIcon">🎵</span>
+    </button>
+
+    <!-- Reading Progress Indicator -->
+    <div class="progress-bar" id="progressBar"></div>
+
+    <!-- ==================== 1. HERO / LANDING ==================== -->
+    <section class="section hero-section" id="hero">
+        <div class="container hero-content reveal-item">
+            <div class="date-badge floating-badge">✨ 14th September • A Special Day ✨</div>
+            <h1 class="hero-title">Happy Birthday, <br><span class="highlight-name glow-pulse">Uma ❤️</span></h1>
+            <p class="hero-subtitle">My Best Friend • My Safe Haven • My Anchor</p>
+            <div class="hero-intro">
+                <p class="hero-quote">"On your special day, sending you all my love, deepest respect, and warmest wishes from the bottom of my heart..."</p>
+            </div>
+            <button class="btn-primary pulse-btn" onclick="scrollToSection('cakeSection')">
+                Make a Birthday Wish 🎂
+            </button>
+            <div class="scroll-cue">
+                <span>scroll down</span>
+                <span class="cue-arrow">↓</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== 2. BIRTHDAY CELEBRATION FLOW (CANDLES & CAKE) ==================== -->
+    <section class="section cake-section" id="cakeSection">
+        <div class="container reveal-item">
+            
+            <!-- Sequential Celebration Stepper -->
+            <div class="celebration-stepper">
+                <div class="step-pill active" id="stepPill1">
+                    <span class="step-num">1</span>
+                    <span class="step-label">Blow Candles 🕯️</span>
+                </div>
+                <div class="step-divider" id="stepDiv1"></div>
+                <div class="step-pill" id="stepPill2">
+                    <span class="step-num">2</span>
+                    <span class="step-label">Cut Cake 🍰</span>
+                </div>
+                <div class="step-divider" id="stepDiv2"></div>
+                <div class="step-pill" id="stepPill3">
+                    <span class="step-num">3</span>
+                    <span class="step-label">Open Gifts 🎁</span>
+                </div>
+            </div>
+
+            <div class="cake-header-badge" id="flowBadge">Step 1 • Make a Birthday Wish</div>
+            <h2 class="section-title" id="flowTitle">Make a Wish, Uma ✨</h2>
+            <p class="section-desc" id="flowDesc">Close your eyes, make a meaningful wish from your heart, and tap to blow out your candles!</p>
+
+            <!-- Interactive Cake Stage -->
+            <div class="cake-stage-container">
+                <!-- Floating Golden Knife (Appears on Step 2) -->
+                <div class="cake-knife" id="cakeKnife" onclick="cutTheCake()" title="Tap to slice the cake">
+                    <div class="knife-handle"></div>
+                    <div class="knife-blade"></div>
+                    <span class="knife-sparkle">✨</span>
+                </div>
+
+                <!-- Cake Box Interactive -->
+                <div class="cake-box" id="cakeBox" onclick="handleCakeTap()" title="Tap to interact with cake">
+                    <div class="cake-visual">
+                        <!-- 24 Number Candles -->
+                        <div class="candles-24-wrap">
+                            <!-- Number 2 Candle -->
+                            <div class="num-candle">
+                                <div class="flame" id="flame1"></div>
+                                <div class="wick"></div>
+                                <span class="candle-digit">2</span>
+                            </div>
+                            <!-- Number 4 Candle -->
+                            <div class="num-candle">
+                                <div class="flame" id="flame2"></div>
+                                <div class="wick"></div>
+                                <span class="candle-digit">4</span>
+                            </div>
+                        </div>
+
+                        <!-- Cake Tiers -->
+                        <div class="cake-layer top" id="cakeTopLayer">
+                            <span>Happy Birthday</span>
+                            <div class="cut-seam" id="cutSeam"></div>
+                        </div>
+                        <div class="cake-layer middle" id="cakeMiddleLayer">
+                            <div class="strawberries">🍓 🍓 🍓 🍓</div>
+                        </div>
+                        <div class="cake-layer bottom">
+                            <span class="tier-accent">For My Uma ❤️</span>
+                        </div>
+                        <div class="cake-plate"></div>
+                    </div>
+
+                    <!-- Detached Delicious Cake Slice (Slides out on cut) -->
+                    <div class="cake-slice-cut" id="cakeSliceCut">
+                        <div class="slice-plate">
+                            <div class="slice-body">
+                                <div class="slice-strawberry">🍓</div>
+                                <div class="slice-frosting"></div>
+                                <span class="slice-text">🍰</span>
+                            </div>
+                        </div>
+                        <span class="slice-tag">First Slice for Uma ❤️</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Wish Reveal Banner (Appears after blowing candles) -->
+            <div class="wish-reveal" id="wishReveal">
+                <span class="stars-icon">✨ 🌟 🎂 🌟 ✨</span>
+                <h3>Happy 24th Birthday, My Love! 💖</h3>
+                <div class="wish-text-wrap">
+                    <p class="wish-para">
+                        24 beautiful years of memories behind you, and a confident, radiant future ahead. <br>
+                        May this year bring you deep peace of mind, vibrant health, and quiet fulfillment. <br>
+                        May that gentle, lovely smile of yours shine bright always! ❤️
+                    </p>
+                </div>
+            </div>
+
+            <!-- Cake Sliced Celebration Banner -->
+            <div class="cake-cut-msg" id="cakeCutMsg">
+                <span class="cut-cake-icon">🍰 🍓 ✨</span>
+                <h3>The Sweetest Slice, Just For You! 💖</h3>
+                <p class="cut-cake-para">
+                    Here's to celebrating you today and every day with genuine love, deep admiration, and heartfelt joy. <br>
+                    Next, three special surprise gift boxes are waiting for you below!
+                </p>
+            </div>
+
+            <!-- Primary Flow Action Button -->
+            <button class="btn-action" id="flowActionBtn" onclick="handleFlowAction()">
+                💨 Blow The Candles
+            </button>
+        </div>
+    </section>
+
+    <!-- ==================== 3. 3D ANIMATED GIFT BOXES (POPUP SURPRISES) ==================== -->
+    <section class="section gifts-section" id="giftsSection">
+        <div class="container reveal-item">
+            <div class="gifts-badge">🎁 Step 3 • Pop-Up Surprises 🎁</div>
+            <h2 class="section-title">Surprise Gift Boxes For You ✨</h2>
+            <p class="section-desc">
+                Each box holds a personal thought, a quiet gratitude, and a promise for tomorrow. <br>
+                Tap each 3D box to pop open the lid and reveal what's inside!
+            </p>
+
+            <!-- 3D Gift Boxes Grid -->
+            <div class="gift-boxes-grid">
+                <!-- Gift Box 1: Imperial Gold & Champagne -->
+                <div class="gift-box-item" id="giftItem1" onclick="openGiftBox(1)">
+                    <div class="gift-box-3d" id="giftBox1">
+                        <div class="gift-lid" id="lid1">
+                            <div class="gift-bow">🎀</div>
+                            <div class="lid-top"></div>
+                            <div class="lid-ribbon"></div>
+                        </div>
+                        <div class="gift-body box-gold">
+                            <div class="body-ribbon-v"></div>
+                            <div class="body-ribbon-h"></div>
+                            <div class="gift-stars-burst" id="burst1">✨ 🌟 ✨</div>
+                            <div class="box-inner-glow"></div>
+                        </div>
+                    </div>
+                    <div class="gift-info">
+                        <h4 class="gift-theme-title">A Safe Sanctuary 🕊️</h4>
+                        <span class="gift-status-pill" id="giftStatus1">Tap to Open ✨</span>
+                    </div>
+                </div>
+
+                <!-- Gift Box 2: Rose Gold & Velvet -->
+                <div class="gift-box-item" id="giftItem2" onclick="openGiftBox(2)">
+                    <div class="gift-box-3d" id="giftBox2">
+                        <div class="gift-lid" id="lid2">
+                            <div class="gift-bow">🎀</div>
+                            <div class="lid-top"></div>
+                            <div class="lid-ribbon"></div>
+                        </div>
+                        <div class="gift-body box-rose">
+                            <div class="body-ribbon-v"></div>
+                            <div class="body-ribbon-h"></div>
+                            <div class="gift-stars-burst" id="burst2">✨ 💖 ✨</div>
+                            <div class="box-inner-glow"></div>
+                        </div>
+                    </div>
+                    <div class="gift-info">
+                        <h4 class="gift-theme-title">Unbreakable Trust 💎</h4>
+                        <span class="gift-status-pill" id="giftStatus2">Tap to Open ✨</span>
+                    </div>
+                </div>
+
+                <!-- Gift Box 3: Celestial Violet & Gold -->
+                <div class="gift-box-item" id="giftItem3" onclick="openGiftBox(3)">
+                    <div class="gift-box-3d" id="giftBox3">
+                        <div class="gift-lid" id="lid3">
+                            <div class="gift-bow">🎀</div>
+                            <div class="lid-top"></div>
+                            <div class="lid-ribbon"></div>
+                        </div>
+                        <div class="gift-body box-violet">
+                            <div class="body-ribbon-v"></div>
+                            <div class="body-ribbon-h"></div>
+                            <div class="gift-stars-burst" id="burst3">✨ 🌟 ✨</div>
+                            <div class="box-inner-glow"></div>
+                        </div>
+                    </div>
+                    <div class="gift-info">
+                        <h4 class="gift-theme-title">Walking Into Tomorrow 🌟</h4>
+                        <span class="gift-status-pill" id="giftStatus3">Tap to Open ✨</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- All Gifts Unlocked Banner -->
+            <div class="all-gifts-unlocked" id="allGiftsUnlocked">
+                <div class="unlocked-badge">✨ All Surprises Unlocked ✨</div>
+                <h3 class="unlocked-heading">You Are Irreplaceable In My Life ❤️</h3>
+                <p class="unlocked-para">
+                    Every memory we've made, every quiet moment we've shared, means the whole world to me. <br>
+                    I have poured everything into this letter for you, straight from my heart.
+                </p>
+                <button class="btn-pop-open" onclick="scrollToSection('letterSection')">
+                    💌 Read My Heartfelt Letter ❤️
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3D Gift Message Popup Modal -->
+    <div class="gift-modal" id="giftModal" onclick="closeGiftModal(event)">
+        <div class="gift-modal-card" id="giftModalCard" onclick="event.stopPropagation()">
+            <button class="gift-modal-close" onclick="closeGiftModal()" aria-label="Close dialog">✕</button>
+            <div class="gift-modal-icon-badge" id="modalIcon">🕊️</div>
+            <span class="gift-modal-tag" id="modalTag">Surprise Box 1</span>
+            <h3 class="gift-modal-title" id="modalTitle">A Safe Sanctuary</h3>
+            <div class="modal-divider-sparkle"></div>
+            <div class="gift-modal-body">
+                <p class="gift-modal-para" id="modalText">Message goes here...</p>
+            </div>
+            <button class="btn-modal-action" id="modalActionBtn" onclick="closeGiftModal()">
+                Cherish In My Heart 💖
+            </button>
+        </div>
+    </div>
+
+    <!-- ==================== 4. WHAT YOU MEAN TO ME (A LETTER FROM THE HEART) ==================== -->
+    <section class="section letter-section" id="letterSection">
+        <div class="container reveal-item">
+            <h2 class="section-title">What You Mean To Me ❤️</h2>
+            <p class="section-desc">
+                "Words will always fall short when describing what you mean to me"
+            </p>
+
+            <div class="letter-card magical-border">
+                <!-- Letter Content (Pure English, Sincere & Genuine) -->
+                <div class="letter-text-content">
+                    <p class="letter-intro">“Hey Uma… Happy Birthday. ❤️”</p>
+
+                    <!-- Paragraph 1 -->
+                    <div class="letter-para-block reveal-item">
+                        <p class="para-en">Honestly, whenever I try to put what you mean to me into words, I never really know where to begin.</p>
+                    </div>
+
+                    <!-- Paragraph 2 -->
+                    <div class="letter-para-block reveal-item">
+                        <p class="para-en">
+                            We’ve been through so much together — good days, hard days, little misunderstandings, 
+                            endless meaningful conversations, and so many quiet moments that might seem ordinary to anyone else, 
+                            but to me, they mean the entire world.
+                        </p>
+                    </div>
+
+                    <!-- Paragraph 3 (Highlight Anchor) -->
+                    <div class="letter-quote-box reveal-item">
+                        <p class="para-en">
+                            You’re not just someone I love. <strong>You are my best friend, my safe haven, my anchor, and the one person in this world with whom I can truly be myself with complete trust.</strong>
+                        </p>
+                    </div>
+
+                    <!-- Paragraph 4 -->
+                    <div class="letter-para-block reveal-item">
+                        <p class="para-en">
+                            With you, I never have to hide or pretend. You are an inseparable part of my life, 
+                            and your presence brings a quiet calm to my days. Having you beside me makes me feel genuinely blessed every day.
+                        </p>
+                    </div>
+
+                    <!-- Paragraph 5 (Milestone Prayer) -->
+                    <div class="letter-para-block reveal-item">
+                        <p class="para-en">
+                            On your 24th birthday today, my deepest prayer is for your lasting peace, good health, and strength. 
+                            May your honesty, hard work, and quiet grace turn every single dream of yours into reality. 
+                            Whatever new opportunities and chapters unfold before you, may you walk forward with dignity and confidence.
+                        </p>
+                    </div>
+
+                    <!-- Paragraph 6 (Future) -->
+                    <div class="letter-highlight reveal-item">
+                        <p class="para-en">
+                            And whatever the future holds for us… I just hope we continue to walk side by side, understanding each other, supporting each other, and growing together with every passing year.
+                        </p>
+                    </div>
+
+                    <!-- Paragraph 7 (Closing) -->
+                    <div class="letter-final reveal-item">
+                        <p class="para-en">
+                            <strong>Happy Birthday, my love. ❤️</strong><br>
+                            I love you deeply. And having you in my life is something I will forever be grateful for.
+                        </p>
+                    </div>
+
+                    <div class="letter-sign reveal-item">
+                        <p class="sign-from">Always beside you, with all my love and respect —</p>
+                        <p class="sign-name">Always Yours, With All My Heart ❤️</p>
+                        <p class="sign-date">14th September 2026</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== 4. BIRTHDAY FINALE & BLESSINGS ==================== -->
+    <section class="section finale-section" id="finaleSection">
+        <div class="container finale-card reveal-item">
+            <div class="crown-icon animate-bounce">✨ 🎂 ✨</div>
+            <h2 class="finale-heading">Happy Birthday, Uma! ❤️</h2>
+            
+            <div class="finale-text-block">
+                <p class="finale-para">
+                    On this special milestone, my deepest wish for you is a life filled with lasting health, inner peace, self-respect, and enduring joy. <br>
+                    Walk fearlessly toward your dreams — I will always be right beside you, quietly, steadfastly, and with all my heart.
+                </p>
+            </div>
+
+            <div class="finale-signature">
+                <span>Forever beside you —</span>
+                <h3>Always Yours, With All My Heart ❤️</h3>
+                <small>14th September 2026 • Forever</small>
+            </div>
+
+            <button class="btn-celebrate pulse-btn" onclick="launchCelebration()">
+                🎉 Tap For Confetti Celebration! 🎊
+            </button>
+        </div>
+    </section>
+
+    <!-- Canvas for Confetti -->
+    <canvas id="confettiCanvas"></canvas>
+
+    <footer class="footer">
+        <p>Made with deep love and respect for Uma • 14th September 2026 ❤️</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
